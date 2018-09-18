@@ -5,6 +5,8 @@ public class ArvoreBinaria{
     static int preIndex = 0;
 
     public static int profundidaMaxima(Node nodo){
+        //ArvoreBinaria arvore = new ArvoreBinaria();
+
         if (nodo == null) { return 0; }
         else {
             int esqProfundidade = profundidaMaxima(nodo.esquerda);
@@ -26,44 +28,45 @@ public class ArvoreBinaria{
     }
 
     public static int procura(ArrayList<String> arr, int inicio, int fim, String value) 
-    {
-        int i;
-        for (i = inicio; i <= fim; i++) 
-        {
-            if (arr.get(i) == value)
-                return i;
-        }
-        return i;
+    {  
+        return arr.indexOf(value);
+    //     int i;
+    //     for (i = inicio; i <= fim; i++) 
+    //     {
+    //         if (arr.get(i) == value)
+    //             return i;
+    //     }
+    //     return i;
     }
 
 
     
     public static void main(String[] args) 
     {
-        ArvoreBinaria arvore = new ArvoreBinaria();
+        //ArvoreBinaria arvore = new ArvoreBinaria();
   
-        arvore.raiz = new Node("a");
-        arvore.raiz.esquerda = new Node("b");
-        arvore.raiz.direita = new Node("c");
-        arvore.raiz.esquerda.esquerda = new Node("d");
-        arvore.raiz.direita.direita = new Node("e");
-        arvore.raiz.direita.esquerda = new Node ("f");
-        arvore.raiz.esquerda.esquerda.esquerda = new Node ("g");
+        // arvore.raiz = new Node("a");
+        // arvore.raiz.esquerda = new Node("b");
+        // arvore.raiz.direita = new Node("c");
+        // arvore.raiz.esquerda.esquerda = new Node("d");
+        // arvore.raiz.direita.direita = new Node("e");
+        // arvore.raiz.direita.esquerda = new Node ("f");
+        // arvore.raiz.esquerda.esquerda.esquerda = new Node ("g");
   
-        System.out.println("Altura da arvore: " + arvore.profundidaMaxima(arvore.raiz));
+        // System.out.println("Altura da arvore: " + arvore.profundidaMaxima(arvore.raiz));
         
-    //     ArrayList <String> pre = new ArrayList<>();
-    //     ArrayList <String> central = new ArrayList<>();
+        ArrayList <String> pre = new ArrayList<>();
+        ArrayList <String> central = new ArrayList<>();
         
-    //     pre.add("xzpv"); pre.add("xay"); pre.add("xb"); pre.add("v4"); pre.add("rz"); pre.add("s3");
-    //     central.add("v4"); central.add("xb"); central.add("s3"); central.add("rz"); central.add("xay"); central.add("xzpv");
+        pre.add("xzpv"); pre.add("xay"); pre.add("xb"); pre.add("v4"); pre.add("rz"); pre.add("s3");
+        central.add("v4"); central.add("xb"); central.add("s3"); central.add("rz"); central.add("xay"); central.add("xzpv");
         
-    //     Node nodo = constroiArvore(central,pre, 0, 5);
+        Node nodo = constroiArvore(central,pre, 0, 5);
 
-    //     int altura = profundidaMaxima(nodo);
+        int altura = profundidaMaxima(nodo);
 
-    //     System.out.println("Altura da arvore:" + altura);
-    // }
+        System.out.println("Altura da arvore:" + altura);
+    
 }
 }
     
