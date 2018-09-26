@@ -1,4 +1,10 @@
 import java.util.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.nio.charset.Charset;
 
 public class ArvoreBinaria {
     Node raiz;
@@ -21,8 +27,6 @@ public class ArvoreBinaria {
     // }
 
     public static int profundidaMaxima(Node nodo) {
-        // ArvoreBinaria arvore = new ArvoreBinaria();
-
         if (nodo == null) {
             return 0;
         } else {
@@ -57,36 +61,26 @@ public class ArvoreBinaria {
     }
 
     public static void main(String[] args) {
-        // ArvoreBinaria arvore = new ArvoreBinaria();
-
-        // arvore.raiz = new Node("a");
-        // arvore.raiz.esquerda = new Node("b");
-        // arvore.raiz.direita = new Node("c");
-        // arvore.raiz.esquerda.esquerda = new Node("d");
-        // arvore.raiz.direita.direita = new Node("e");
-        // arvore.raiz.direita.esquerda = new Node ("f");
-        // arvore.raiz.esquerda.esquerda.esquerda = new Node ("g");
-
-        // System.out.println("Altura da arvore: " +
-        // arvore.profundidaMaxima(arvore.raiz));
-
         ArrayList<String> pre = new ArrayList<>();
         ArrayList<String> central = new ArrayList<>();
 
-        pre.add("xzpv");
-        pre.add("xay");
-        pre.add("xb");
-        pre.add("v4");
-        pre.add("rz");
-        pre.add("s3");
-        central.add("v4");
-        central.add("xb");
-        central.add("s3");
-        central.add("rz");
-        central.add("xay");
-        central.add("xzpv");
+        Path arq = Paths
+                .get("/Users/daniela/Desktop/PUCRS/Algoritmos2/Trabalho1/SalvandoArvores/CasosTeste/caso50.txt");
+        System.out.println(arq);
+        try (Scanner sc = new Scanner(Files.newBufferedReader(arq, Charset.forName("utf8")))) {
+            String aux = "";
+            String arvPreAux[] = sc.nextLine().split(" ");
+            String arvCen2Aux[] = sc.nextLine().split(" ");
 
-        Node nodo = constroiArvore(central, pre, 0, 5);
+            for (int x = 0; x < arvPreAux.length; x++) {
+                pre.add(arvPreAux[x]);
+                central.add(arvCen2Aux[x]);
+            }
+        } catch (IOException x) {
+            System.err.format("Erro de E/S: %s%n", x);
+        }
+
+        Node nodo = constroiArvore(central, pre, 0, (central.size() - 1));
 
         int altura = profundidaMaxima(nodo);
 
