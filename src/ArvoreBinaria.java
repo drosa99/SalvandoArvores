@@ -7,42 +7,27 @@ import java.util.List;
 import java.nio.charset.Charset;
 
 public class ArvoreBinaria {
-    Node raiz;
+   // Node raiz;
     static int preIndex = 0;
-
-    // public void carregaArq() throws IOException {
-    // Path arq = Paths.get("caso05.txt");
-    // try (Scanner sc = new Scanner(Files.newBufferedReader(arq,
-    // Charset.forName("utf8")))) {
-    // String aux = "";
-    // String arvPreAux[] = sc.nextLine().split(" ");
-    // String arvCen2Aux[] = sc.nextLine().split(" ");
-    // for (int x = 0; x < arvPreAux.length; x++) {
-    // arvPre.add(arvPreAux[x]);
-    // arvInfix.add(arvCen2Aux[x]);
-    // }
-    // } catch (IOException x) {
-    // System.err.format("Erro de E/S: %s%n", x);
-    // }
-    // }
 
     public static int profundidaMaxima(Node nodo) {
         if (nodo == null) {
             return 0;
         } else {
-            int esqProfundidade = profundidaMaxima(nodo.esquerda);
-            int dirProfundidade = profundidaMaxima(nodo.direita);
+            int esqProfundidade = profundidaMaxima(nodo.esquerda) + 1;
+            int dirProfundidade = profundidaMaxima(nodo.direita) + 1;
 
             if (esqProfundidade > dirProfundidade) {
-                return (esqProfundidade + 1);
+                return (esqProfundidade );
             } else {
-                return (dirProfundidade + 1);
+                return (dirProfundidade );
             }
         }
     }
 
     // inicio comeca com 0; fim comeca com tamanho-1
     public static Node constroiArvore(ArrayList<String> central, ArrayList<String> pre, int inicio, int fim) {
+
         if (inicio > fim) {
             return null;
         }
@@ -50,17 +35,16 @@ public class ArvoreBinaria {
         if (inicio == fim) {
             return tNode;
         }
-        int centralIndex = procura(central, inicio, fim, tNode.elemento);
+        int centralIndex = central.indexOf(tNode.elemento);
         tNode.esquerda = constroiArvore(central, pre, inicio, centralIndex - 1);
         tNode.direita = constroiArvore(central, pre, centralIndex + 1, fim);
         return tNode;
     }
 
-    public static int procura(ArrayList<String> arr, int inicio, int fim, String value) {
-        return arr.indexOf(value);
-    }
 
     public static void main(String[] args) {
+        long time1 = System.currentTimeMillis();
+
         ArrayList<String> pre = new ArrayList<>();
         ArrayList<String> central = new ArrayList<>();
 
@@ -84,7 +68,10 @@ public class ArvoreBinaria {
 
         int altura = profundidaMaxima(nodo);
 
-        System.out.println("Altura da arvore:" + altura);
+        long time2 = System.currentTimeMillis();
+        long tempo = time2-time1;
+
+        System.out.println("Altura da arvore:" + altura + "\n Tempo:" + tempo + "ms");
 
     }
 }
